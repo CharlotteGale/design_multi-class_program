@@ -108,7 +108,7 @@ class Diary:
 
 ```python
 class DiaryEntry:
-    def __init__(self, title, contents):
+    def __init__(self, title, contents, phone_number=None):
         # Parameters:
         #   title: string
         #   contents: string
@@ -149,8 +149,10 @@ class DiaryEntry:
 - ValueError to ensure only positive integers can be passed in
 
 `DiaryEntry.__init__()`
-- TypeError to ensure only strings can be passed in
-- ValueError to ensure no empty strings get passed in
+- TypeError to ensure only strings can be passed in (for title and contents)
+- ValueError to ensure no empty strings get passed in (for title and contents)
+- TypeError to ensure phone_number is either None or a string
+- ValueError to ensure phone_number matches valid UK mobile format (if provided)
 
 `DiaryEntry.reading_time()`
 - TypeError to ensure only `int` can be passed in
@@ -250,15 +252,15 @@ When called
 Return a list of contacts from instances of DiaryEntry
 """
 diary = Diary()
-diary_entry1 = DiaryEntry("title1", "contains 3 contacts information")
-diary_entry2 = DiaryEntry("title2", "contains 0 contancts information")
-diary_entry3 = DiaryEntry("title3", "contants 1 contacts information")
+diary_entry1 = DiaryEntry("title1", "short sentence", "07123456789")
+diary_entry2 = DiaryEntry("title2", "contents of 100 words")
+diary_entry3 = DiaryEntry("title3", "short sentence", "07223456789")
 
 diary.add(diary_entry1)
 diary.add(diary_entry2)
 diary.add(diary_entry3)
 
-assert diary.contacts_list() == [["name1", "07123456789"], ["name2", "07223456789"], ["name3", "07323456789"], ["name4", "07423456789"]]
+assert diary.contacts_list() == ["07123456789", "07223456789"]
 ```
 
 ### `DiaryEntry()`
