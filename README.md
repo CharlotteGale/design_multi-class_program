@@ -137,6 +137,24 @@ class DiaryEntry:
 4. `Diary.contacts_list()`
 
 ### Validation Tests
+`ToDo.add_task()`
+- TypeError to ensure only strings can be passed in
+- ValueError to ensure no empty strings get passed in
+
+`Diary.add()`
+- TypeError to ensure only an instance of DiaryEntry can be passed in
+
+`Diary.read_an_entry()`
+- TypeError to ensure only `int` can be passed in
+- ValueError to ensure only positive integers can be passed in
+
+`DiaryEntry.__init__()`
+- TypeError to ensure only strings can be passed in
+- ValueError to ensure no empty strings get passed in
+
+`DiaryEntry.reading_time()`
+- TypeError to ensure only `int` can be passed in
+- ValueError to ensure only positive integers can be passed in
 
 ## Test Cases
 ### `ToDo()`
