@@ -66,6 +66,7 @@ class Diary:
         #   None
         # Internal State:
         #   self.diary_entries = [] : empty list to store instances of DiaryEntry
+        #   self.contacts_list = [] : empty list to store contacts information
         pass
 
     def add(self, entry):
