@@ -186,6 +186,32 @@ todo.add_task("Here's another task")
 assert todo.task_list == ["Here's a task", "Here's another task"]
 ```
 
+```python
+# todo.add()
+"""
+When an int etc is passed into todo.add()
+Return a TypeError
+"""
+todo = ToDo()
+with pytest.raises(TypeError) as e:
+    todo.add(123)
+error_message = str(e.value)
+assert error_message == "Enter a valid task string"
+```
+
+```python
+# todo.add()
+"""
+Ensure empty strings cannot be passed in
+Return a ValueError
+"""
+todo = ToDo()
+with pytest.raises(ValueError) as e:
+    todo.add("")
+error_message = str(e.value)
+assert error_message == "Enter a task"
+```
+
 ### `Diary()`
 ```python
 # __init__()
@@ -263,6 +289,48 @@ diary.add(diary_entry3)
 assert diary.contacts_list() == ["07123456789", "07223456789"]
 ```
 
+```python
+# diary.add()
+"""
+To ensure only instances of DiaryEntry can be passed in
+Return TypeError when entry != DiaryEntry
+"""
+diary = Diary()
+
+with pytest.raises(TypeError) as e:
+    diary.add(123)
+error_message = str(e.value)
+assert error_message == "Enter an instance of DiaryEntry"
+```
+
+```python
+# diary.read_an_entry()
+"""
+To ensure only integers can be passed in
+Raise TypeError when wpm or minutes != int
+"""
+diary = Diary()
+
+with pytest.raises(TypeError) as e:
+    diary.read_an_entry("100", 30)
+error_message = str(e.value)
+assert error_message == "Enter an integer"
+```
+
+```python
+# diary.read_an_entry()
+"""
+To ensure only positive integers can be passed in
+Raise ValueError if wmp or minutes are negative
+"""
+diary = Diary()
+
+with pytest.raises(ValueError) as e:
+    diary.read_an_entry(-400, 30)
+error_message = str(e.value)
+assert error_message == "Enter positive values only"
+```
+
 ### `DiaryEntry()`
 ```python
 # __init__()
@@ -274,6 +342,12 @@ diary_entry = DiaryEntry("title", "contents of 100 words")
 
 assert diary_entry.title == "title"
 assert diary_entry.contents == "contents of 100 words"
+assert diary_entry.phone_number == None
+
+diary_entry = DiaryEntry("Monday", "Phone Bill", "07711222333")
+assert diary_entry.title == "Monday"
+assert diary_entry.contents == "Phone Bill"
+assert diary_entry.phone_number == "07711222333"
 ```
 
 ```python
@@ -285,4 +359,32 @@ Return an integer of how long it will take to read the contents of DiaryEntry
 diary_entry = DiaryEntry("title", "contents of 1000 words")
 
 assert diary_entry.reading_time(100) == 10
+```
+
+```python
+# diary_entry.reading_time()
+"""
+To ensure only integers can be passed in
+Raise TypeError when wpm != int
+"""
+diary_entry = DiaryEntry()
+
+with pytest.raises(TypeError) as e:
+    diary_entry.reading_time("100")
+error_message = str(e.value)
+assert error_message == "Enter an integer"
+```
+
+```python
+# diary_entry.reading_time()
+"""
+To ensure only positive integers can be passed in
+Raise ValueError if wmp are negative
+"""
+diary_entry = DiaryEntry()
+
+with pytest.raises(TypeError) as e:
+    diary_entry.reading_time(-100)
+error_message = str(e.value)
+assert error_message == "Enter a positive value"
 ```
