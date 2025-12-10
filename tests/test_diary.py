@@ -82,41 +82,44 @@ diary.add(diary_entry3)
 assert diary.contacts_list() == [phone1, phone2]
 
 
-# # diary.add()
-# """
-# To ensure only instances of DiaryEntry can be passed in
-# Return TypeError when entry != DiaryEntry
-# """
-# diary = Diary()
+# diary.add()
+def test_raises_type_error_if_not_instance_of_DiaryEntry():
+    """
+    To ensure only instances of DiaryEntry can be passed in
+    Return TypeError when entry != DiaryEntry
+    """
+    diary = Diary()
 
-# with pytest.raises(TypeError) as e:
-#     diary.add(123)
-# error_message = str(e.value)
-# assert error_message == "Enter an instance of DiaryEntry"
-
-
-# # diary.read_an_entry()
-# """
-# To ensure only integers can be passed in
-# Raise TypeError when wpm or minutes != int
-# """
-# diary = Diary()
-
-# with pytest.raises(TypeError) as e:
-#     diary.read_an_entry("100", 30)
-# error_message = str(e.value)
-# assert error_message == "Enter an integer"
+    with pytest.raises(TypeError) as e:
+        diary.add(123)
+    error_message = str(e.value)
+    assert error_message == "Enter an instance of DiaryEntry"
 
 
-# # diary.read_an_entry()
-# """
-# To ensure only positive integers can be passed in
-# Raise ValueError if wmp or minutes are negative
-# """
-# diary = Diary()
+# diary.read_an_entry()
+def test_raises_type_error_if_input_not_integer():
+    """
+    To ensure only integers can be passed in
+    Raise TypeError when wpm or minutes != int
+    """
+    diary = Diary()
 
-# with pytest.raises(ValueError) as e:
-#     diary.read_an_entry(-400, 30)
-# error_message = str(e.value)
-# assert error_message == "Enter positive values only"
+    with pytest.raises(TypeError) as e:
+        diary.read_an_entry("100", 30)
+    error_message = str(e.value)
+    assert error_message == "Enter an integer"
+
+
+# diary.read_an_entry()
+def test_raise_value_error_if_input_negative():
+    """
+    To ensure only positive integers can be passed in
+    Raise ValueError if wmp or minutes are negative
+    """
+    diary = Diary()
+
+    with pytest.raises(ValueError) as e:
+        diary.read_an_entry(-400, 30)
+    error_message = str(e.value)
+    assert error_message == "Enter positive values only"
 
