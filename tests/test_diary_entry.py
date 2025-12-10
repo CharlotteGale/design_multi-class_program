@@ -16,7 +16,7 @@ def test_empty_list_created_on_init():
     title2 = generate_contents(3)
     contents2 = generate_contents(10)
     phone2 = generate_uk_mobile()
-    
+
     diary_entry = DiaryEntry(title1, contents1)
 
     assert diary_entry.title == title1
@@ -41,28 +41,30 @@ def test_int_returned_when_wpm_passed_to_read_contents():
     assert diary_entry.reading_time(100) == 10
 
 
-# # diary_entry.reading_time()
-# """
-# To ensure only integers can be passed in
-# Raise TypeError when wpm != int
-# """
-# diary_entry = DiaryEntry()
+# diary_entry.reading_time()
+def test_raises_type_error_if_not_int_passed():
+    """
+    To ensure only integers can be passed in
+    Raise TypeError when wpm != int
+    """
+    diary_entry = DiaryEntry(generate_contents(3), generate_contents(100))
 
-# with pytest.raises(TypeError) as e:
-#     diary_entry.reading_time("100")
-# error_message = str(e.value)
-# assert error_message == "Enter an integer"
+    with pytest.raises(TypeError) as e:
+        diary_entry.reading_time("100")
+    error_message = str(e.value)
+    assert error_message == "Enter an integer"
 
 
-# # diary_entry.reading_time()
-# """
-# To ensure only positive integers can be passed in
-# Raise ValueError if wmp are negative
-# """
-# diary_entry = DiaryEntry()
+# diary_entry.reading_time()
+def test_raises_value_error_if_negative_int_passed():
+    """
+    To ensure only positive integers can be passed in
+    Raise ValueError if wmp are negative
+    """
+    diary_entry = DiaryEntry(generate_contents(3), generate_contents(100))
 
-# with pytest.raises(TypeError) as e:
-#     diary_entry.reading_time(-100)
-# error_message = str(e.value)
-# assert error_message == "Enter a positive value"
+    with pytest.raises(ValueError) as e:
+        diary_entry.reading_time(-100)
+    error_message = str(e.value)
+    assert error_message == "Enter a positive value"
 
