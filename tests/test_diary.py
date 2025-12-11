@@ -54,32 +54,34 @@ def test_return_an_instance_of_DiaryEntry_to_read():
     diary = Diary()
     diary_entry1 = DiaryEntry("title1", generate_contents(498))
     diary_entry2 = DiaryEntry("title2", generate_contents(502))
+    diary_entry3 = DiaryEntry("title3", generate_contents(490))
 
     diary.add(diary_entry1)
     diary.add(diary_entry2)
+    diary.add(diary_entry3)
 
     assert diary.read_an_entry(100, 5) == diary_entry1
     assert diary.read_an_entry(100, 2) == None
 
 
 # diary.contacts_list()
+def test_return_list_of_contacts_from_diary():
+    """
+    When called
+    Return a list of contacts from instances of DiaryEntry
+    """
+    diary = Diary()
+    phone1 = generate_uk_mobile()
+    phone2 = generate_uk_mobile()
+    diary_entry1 = DiaryEntry("title1", generate_contents(10), phone1)
+    diary_entry2 = DiaryEntry("title2", generate_contents(100))
+    diary_entry3 = DiaryEntry("title3", generate_contents(4), phone2)
 
-"""
-When called
-Return a list of contacts from instances of DiaryEntry
-"""
-diary = Diary()
-phone1 = generate_uk_mobile()
-phone2 = generate_uk_mobile()
-diary_entry1 = DiaryEntry("title1", generate_contents(10), phone1)
-diary_entry2 = DiaryEntry("title2", generate_contents(100))
-diary_entry3 = DiaryEntry("title3", generate_contents(4), phone2)
+    diary.add(diary_entry1)
+    diary.add(diary_entry2)
+    diary.add(diary_entry3)
 
-diary.add(diary_entry1)
-diary.add(diary_entry2)
-diary.add(diary_entry3)
-
-assert diary.contacts_list() == [phone1, phone2]
+    assert diary.contacts_list() == [phone1, phone2]
 
 
 # diary.add()

@@ -26,7 +26,7 @@ class Diary:
                 if best_entry == None:
                     best_entry = entry
                 else:
-                    if entry > best_entry:
+                    if entry.reading_time(wpm) > best_entry.reading_time(wpm):
                         best_entry = entry
         
         return best_entry
